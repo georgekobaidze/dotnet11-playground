@@ -56,7 +56,8 @@ while (true)
     {
         LoggedIn l => $"Welcome back, {l.UserName}!",
         InvalidCredentials c => $"Wrong user name or password. {c.AttemptsLeft} attempts left.",
-        AccountLocked a => $"Too many attempts. Try again after {a.Until:t}."
+        AccountLocked a => $"Too many attempts. Try again after {a.Until:t}.",
+        TwoFactorRequired t => $"Password accepted. Enter the code from your {t.Method}."
     };
 
     Console.WriteLine(message);
