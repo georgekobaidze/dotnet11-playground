@@ -102,24 +102,38 @@
 //     Console.WriteLine();
 // }
 
-// Command Parser
+// // Command Parser
 
-var todo = new TodoList();
-Console.WriteLine("Commands: add <text>, done <number>, list, quit");
+// var todo = new TodoList();
+// Console.WriteLine("Commands: add <text>, done <number>, list, quit");
+
+// while (true)
+// {
+//     Console.Write("> ");
+//     string? line = Console.ReadLine();
+
+//     if (line is null)
+//         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
+
+//     Command command = CommandParser.Parse(line);
+//     Console.WriteLine(todo.Execute(command));
+
+//     if (command is Quit)
+//         break;
+// }
+
+// Id Mapper
 
 while (true)
 {
-    Console.Write("> ");
-    string? line = Console.ReadLine();
+    Console.Write("Enter an ID: ");
+    string? input = Console.ReadLine();
 
-    if (line is null)
+    if (input is null)
         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
 
-    Command command = CommandParser.Parse(line);
-    Console.WriteLine(todo.Execute(command));
-
-    if (command is Quit)
-        break;
+    ExternalId id = IdMapper.Parse(input);
+    Console.WriteLine($"Key: {IdMapper.ToKey(id)}");
 }
 
 
