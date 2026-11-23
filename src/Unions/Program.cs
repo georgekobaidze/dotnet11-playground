@@ -85,19 +85,41 @@
 //     Console.WriteLine(message);
 // }
 
-// State Machine
+// // State Machine
 
-ConnectionState state = new Disconnected();
+// ConnectionState state = new Disconnected();
+
+// while (true)
+// {
+//     Console.WriteLine($"State: {ConnectionMachine.Describe(state)}");
+//     Console.Write("Does the server respond? (y/n): ");
+//     string? input = Console.ReadLine();
+
+//     if (input is null)
+//         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
+
+//     state = ConnectionMachine.Next(state, serverResponds: input.Trim().ToLower() == "y");
+//     Console.WriteLine();
+// }
+
+// Command Parser
+
+var todo = new TodoList();
+Console.WriteLine("Commands: add <text>, done <number>, list, quit");
 
 while (true)
 {
-    Console.WriteLine($"State: {ConnectionMachine.Describe(state)}");
-    Console.Write("Does the server respond? (y/n): ");
-    string? input = Console.ReadLine();
+    Console.Write("> ");
+    string? line = Console.ReadLine();
 
-    if (input is null)
+    if (line is null)
         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
 
-    state = ConnectionMachine.Next(state, serverResponds: input.Trim().ToLower() == "y");
-    Console.WriteLine();
+    Command command = CommandParser.Parse(line);
+    Console.WriteLine(todo.Execute(command));
+
+    if (command is Quit)
+        break;
 }
+
+
