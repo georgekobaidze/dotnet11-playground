@@ -66,21 +66,38 @@
 
 // ----------------------------------------------------Examples------------------------------------------------
 
-// Age Parser
+// // Age Parser
+
+// while (true)
+// {
+//     Console.Write("Enter your age: ");
+//     string? input = Console.ReadLine();
+
+//     if (input is null)
+//         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
+
+//     string message = AgeParser.Parse(input) switch
+//     {
+//         int age => $"Got it, you're {age}.",
+//         ParseError error => $"Oops: {error.Message}"
+//     };
+
+//     Console.WriteLine(message);
+// }
+
+// State Machine
+
+ConnectionState state = new Disconnected();
 
 while (true)
 {
-    Console.Write("Enter your age: ");
+    Console.WriteLine($"State: {ConnectionMachine.Describe(state)}");
+    Console.Write("Does the server respond? (y/n): ");
     string? input = Console.ReadLine();
 
     if (input is null)
         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
 
-    string message = AgeParser.Parse(input) switch
-    {
-        int age => $"Got it, you're {age}.",
-        ParseError error => $"Oops: {error.Message}"
-    };
-
-    Console.WriteLine(message);
+    state = ConnectionMachine.Next(state, serverResponds: input.Trim().ToLower() == "y");
+    Console.WriteLine();
 }
