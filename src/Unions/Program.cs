@@ -33,33 +33,54 @@
 
 // ----------------------------------------------------------------------------------------------------------
 
-// After
+// // After
 
-using Unions.After;
+// using Unions.After;
 
-var authService = new AuthService();
+// var authService = new AuthService();
+
+// while (true)
+// {
+//     Console.Write("User name: ");
+//     string? userName = Console.ReadLine();
+
+//     Console.Write("Password: ");
+//     string? password = Console.ReadLine();
+
+//     if (userName is null || password is null)
+//         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
+
+//     LoginResult result = authService.Login(userName, password);
+
+//     string message = result switch
+//     {
+//         LoggedIn l => $"Welcome back, {l.UserName}!",
+//         InvalidCredentials c => $"Wrong user name or password. {c.AttemptsLeft} attempts left.",
+//         AccountLocked a => $"Too many attempts. Try again after {a.Until:t}.",
+//         TwoFactorRequired t => $"Password accepted. Enter the code from your {t.Method}."
+//     };
+
+//     Console.WriteLine(message);
+//     Console.WriteLine();
+// }
+
+// ----------------------------------------------------Examples------------------------------------------------
+
+// Age Parser
 
 while (true)
 {
-    Console.Write("User name: ");
-    string? userName = Console.ReadLine();
+    Console.Write("Enter your age: ");
+    string? input = Console.ReadLine();
 
-    Console.Write("Password: ");
-    string? password = Console.ReadLine();
-
-    if (userName is null || password is null)
+    if (input is null)
         break; // the input stream was closed (Ctrl+Z on Windows, Ctrl+D on macOS/Linux)
 
-    LoginResult result = authService.Login(userName, password);
-
-    string message = result switch
+    string message = AgeParser.Parse(input) switch
     {
-        LoggedIn l => $"Welcome back, {l.UserName}!",
-        InvalidCredentials c => $"Wrong user name or password. {c.AttemptsLeft} attempts left.",
-        AccountLocked a => $"Too many attempts. Try again after {a.Until:t}.",
-        TwoFactorRequired t => $"Password accepted. Enter the code from your {t.Method}."
+        int age => $"Got it, you're {age}.",
+        ParseError error => $"Oops: {error.Message}"
     };
 
     Console.WriteLine(message);
-    Console.WriteLine();
 }
