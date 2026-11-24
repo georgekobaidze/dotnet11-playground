@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/LabeledLoops/LabeledLoops.csproj" />
     <Project Path="src/Unions/Unions.csproj" />
     <Project Path="src/UnionsWebApi/UnionsWebApi.csproj" />
   </Folder>
