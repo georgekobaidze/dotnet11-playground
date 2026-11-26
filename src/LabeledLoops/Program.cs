@@ -7,26 +7,26 @@ string[][] orders =
     ["Headphones"]
 ];
 
-// // C# 15
+// C# 15
 
-// nextOrder:
-// foreach (string[] order in orders)
-// {
-//     Console.WriteLine("New order:");
+nextOrder:
+foreach (string[] order in orders)
+{
+    Console.WriteLine("New order:");
 
-//     foreach (string item in order)
-//     {
-//         if (item == "OUT_OF_STOCK")
-//         {
-//             Console.WriteLine("  Item missing, skipping this order.");
-//             continue nextOrder; // jump to the next ORDER, not the next item
-//         }
+    foreach (string item in order)
+    {
+        if (item == "OUT_OF_STOCK")
+        {
+            Console.WriteLine("  Item missing, skipping this order.");
+            continue nextOrder; // jump to the next ORDER, not the next item
+        }
 
-//         Console.WriteLine($"  Packing {item}");
-//     }
+        Console.WriteLine($"  Packing {item}");
+    }
 
-//     Console.WriteLine("  Order shipped!");
-// }
+    Console.WriteLine("  Order shipped!");
+}
 
 // // Before C# 15
 
