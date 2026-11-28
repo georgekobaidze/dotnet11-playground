@@ -5,7 +5,7 @@
     Delivered d => $"Delivered on {d.DeliveredAt:d}",
 };
 
-public abstract record OrderStatus;
+public closed record OrderStatus;
 public record Pending : OrderStatus;
 public record Shipped(string TrackingNumber) : OrderStatus;
 public record Delivered(DateTime DeliveredAt) : OrderStatus;
